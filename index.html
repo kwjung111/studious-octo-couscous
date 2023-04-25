@@ -42,6 +42,12 @@
 <body>
   
   <p> PWA</p>
+  <button type="button" onclick="cam()">버튼1</button>
+  <button type="button">버튼2</button>
+  <button type="button">버튼3</button>
+  <button type="button">버튼4</button>
+  
+  <video autoplay>vids</video>
 
   <script>
     if ('serviceWorker' in navigator) {
@@ -49,6 +55,21 @@
         '/sw.js'
       );
     }
+
+  cam = function(){
+
+    console.log("cam")
+
+    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+  .then(function(stream) {
+    // 웹캠 스트림을 비디오 요소에 연결하여 표시
+    var videoElement = document.querySelector('video');
+    videoElement.srcObject = stream;
+  })
+  .catch(function(err) {
+    console.log("웹캠 스트림을 가져올 수 없습니다: " + err.message);
+  });
+  }
   </script>
 </body>
 
