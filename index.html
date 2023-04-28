@@ -42,9 +42,9 @@
 <body>
   
   <p> PWA</p>
-  <button type="button" onclick="cam()">버튼1</button>
-  <button type="button" onclick="cam2()">버튼2</button>
-  <button type="button">버튼3</button>
+  <button type="button" onclick="cam()">webcam</button>
+  <button type="button" onclick="cam2()">vib</button>
+  <button type="button" onclick="mic()">mic</button>
   <button type="button">버튼4</button>
   <input type="file" accept="image/*" onchange="handleFileSelect(event)">
   <input type="file" accept="image/*" capture="camera" onchange="handleFileSelect(event)">
@@ -96,6 +96,17 @@
     // 파일을 선택한 후 처리하는 코드 작성
     // ...
   }
+
+  function mic(){
+  navigator.mediaDevices.getUserMedia({ audio: true })
+  .then(stream => {
+    // 스트림을 처리하는 코드 작성
+    // ...
+  })
+  .catch(error => {
+    console.error('마이크 접근 권한이 없습니다.', error);
+  });
+}
   </script>
 </body>
 
