@@ -43,9 +43,9 @@
   
   <p> PWA</p>
   <button type="button" onclick="cam()">webcam</button>
-  <button type="button" onclick="cam2()">vib</button>
+  <button type="button" onclick="cam2()">진동</button>
   <button type="button" onclick="mic()">mic</button>
-  <button type="button">버튼4</button>
+  <button type="button" onclick="permissions()">권한</button>
   <input type="file" accept="image/*" onchange="handleFileSelect(event)">
   <input type="file" accept="image/*" capture="camera" onchange="handleFileSelect(event)">
 
@@ -107,6 +107,17 @@
     console.error('마이크 접근 권한이 없습니다.', error);
   });
 }
+
+function permissions(){
+  navigator.permissions.query({ name: "geolocation" }).then((result) => {
+    if (result.state === "granted") {
+      alert('권한 허용됨');
+    } else if (result.state === "prompt") {
+      //승인창 띄우기
+    }
+  });
+}
+
   </script>
 </body>
 
