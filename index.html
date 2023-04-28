@@ -43,10 +43,11 @@
   
   <p> PWA</p>
   <button type="button" onclick="cam()">버튼1</button>
-  <button type="button">버튼2</button>
+  <button type="button" onclick="cam2()">버튼2</button>
   <button type="button">버튼3</button>
   <button type="button">버튼4</button>
-  
+  <input type="file" accept="image/*" onchange="handleFileSelect(event)">
+
   <video autoplay>vids</video>
 
   <script>
@@ -69,6 +70,29 @@
   .catch(function(err) {
     console.log("웹캠 스트림을 가져올 수 없습니다: " + err.message);
   });
+  }
+
+  const browserName = navigator.userAgent;
+  console.log(browserName)
+  
+  cam2 = function(){
+    /*navigator.mediaDevices.getUserMedia({ video : true})//스마트폰 카메라에 접근
+    .then(function(stream){
+
+      const videoElement = document.querySelector('video');
+      videoElement.srcObject = stream;
+    })
+    .catch(function(error){
+      console.log('에러')
+    })
+    */
+
+  }
+
+  function handleFileSelect(event) {
+    const file = event.target.files[0];
+    // 파일을 선택한 후 처리하는 코드 작성
+    // ...
   }
   </script>
 </body>
