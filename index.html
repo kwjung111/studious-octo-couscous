@@ -86,11 +86,11 @@
       console.log('에러')
     })
     */
-
+    window.location.href = 'intent:#Intent;action=android.media.action.IMAGE_CAPTURE;end';
   }
 
   function handleFileSelect(event) {
-    const file = event.target.files[0];
+    const file = event.target.files;
     // 파일을 선택한 후 처리하는 코드 작성
     // ...
   }
