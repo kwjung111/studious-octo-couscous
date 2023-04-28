@@ -46,9 +46,13 @@
   <button type="button" onclick="cam('2')">후면카메라</button>
   <button type="button" onclick="cam2()">진동</button>
   <button type="button" onclick="mic()">mic</button>
+  <button type="button" onclick="contact()">연락처_IOS</button>
   <button type="button" onclick="permissions()">권한</button>
   <input type="file" accept="image/*" onchange="handleFileSelect(event)">
   <input type="file" accept="image/*" capture="camera" onchange="handleFileSelect(event)">
+
+
+  <section id="contacts"></section>
 
   <video autoplay>vids</video>
 
@@ -60,7 +64,7 @@
     }
 
   cam = function(mod){
-    
+
     if(document.querySelector('video').srcObject != null){
       document.querySelector('video').srcObject = null
       return;
@@ -126,6 +130,48 @@ function permissions(){
       alert('에러')
     }
   });
+}
+
+function contact(){
+  // Contacts.framework에서 Contact Picker를 생성
+  var contactPicker = new window.ContactsPicker();
+
+  const list = document.querySelector('#contacts');
+
+  // Contact Picker가 완료되면 호출될 콜백 함수
+  contactPicker.oncontactsselected = function(e) {
+    // 선택한 연락처 정보를 가져옴
+    var contacts = e.contacts;
+    
+    const html = contacts.reduce((html, contact) => {
+      const names = contact.name.join(', ');
+      const emails = contact.email.join(', ');
+      const telephone = contact.tel.join(', ');
+
+      return `${html}
+        <p>
+          <span>
+            <i class="material-icons">person</i>
+            <strong>${names}</strong><br>
+          </span>
+          <span>
+            <i class="material-icons">mail_outline</i>
+            ${emails}<br>
+          </span>
+          <span>
+            <i class="material-icons">phone</i>
+            ${telephone}</p>
+          </span>
+        `;
+      }, ``);
+
+    list.innerHTML = html;
+  };
+
+  };
+
+  // Contact Picker를 실행
+  contactPicker.show();
 }
 
   </script>
