@@ -42,7 +42,8 @@
 <body>
   
   <p> PWA</p>
-  <button type="button" onclick="cam()">webcam</button>
+  <button type="button" onclick="cam('1')">웹캠</button>
+  <button type="button" onclick="cam('2')">후면카메라</button>
   <button type="button" onclick="cam2()">진동</button>
   <button type="button" onclick="mic()">mic</button>
   <button type="button" onclick="permissions()">권한</button>
@@ -58,11 +59,12 @@
       );
     }
 
-  cam = function(){
+  cam = function(mod){
 
     console.log("cam")
-
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    let mode = 'environment'
+    if(mod == 2) mode = 'user'
+    navigator.mediaDevices.getUserMedia({ video:{ facingMode : mode }, audio: false })
   .then(function(stream) {
     // 웹캠 스트림을 비디오 요소에 연결하여 표시
     var videoElement = document.querySelector('video');
