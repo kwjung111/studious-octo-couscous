@@ -47,6 +47,7 @@
   <button type="button">버튼3</button>
   <button type="button">버튼4</button>
   <input type="file" accept="image/*" onchange="handleFileSelect(event)">
+  <input type="file" accept="image/*" capture="camera" onchange="handleFileSelect(event)">
 
   <video autoplay>vids</video>
 
@@ -86,8 +87,8 @@
       console.log('에러')
     })
     */
+    navigator.vibrate(1000);
     window.location.href = 'intent:#Intent;action=android.media.action.IMAGE_CAPTURE;end';
-    navigator.vibrate()
   }
 
   function handleFileSelect(event) {
