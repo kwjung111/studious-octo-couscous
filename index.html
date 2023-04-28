@@ -60,6 +60,11 @@
     }
 
   cam = function(mod){
+    
+    if(document.querySelector('video').srcObject != null){
+      document.querySelector('video').srcObject = null
+      return;
+    }
 
     console.log("cam")
     let mode = 'environment'
