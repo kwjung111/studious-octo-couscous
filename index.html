@@ -114,6 +114,9 @@ function permissions(){
       alert('권한 허용됨');
     } else if (result.state === "prompt") {
       //승인창 띄우기
+      alert('권한 미허용')
+    } else{
+      alert('에러')
     }
   });
 }
