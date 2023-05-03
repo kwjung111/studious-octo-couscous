@@ -5,7 +5,7 @@ importScripts(
 // This is your Service Worker, you can put any of your custom Service Worker
 // code in this file, above the `precacheAndRoute` line.
 
-firebase.InitializeApp({
+const firebaseApp = initializeApp({
   apiKey: "AIzaSyArhZhxCJQfiSlAmmyjlIoyq_P49DjAec0",
   authDomain: "pushtest-e752a.firebaseapp.com",
   projectId: "pushtest-e752a",
@@ -15,7 +15,7 @@ firebase.InitializeApp({
   measurementId: "G-ESRYTC2FZK"
 });
 
-const messaging = firebase.messaging();
+const messaging = messaging(firebaseApp);
 
 messaging.setBackgroundMessageHandler(function(payload) {
   // Customize notification here
