@@ -235,7 +235,10 @@ function contact(){
   }
 
   function psh(){
-    messaging.getToken(messaging,{vapidKey:BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8}).then((currentToken) =>{
+
+    const msg = getMessaging();
+
+    messaging.getToken(msg,{vapidKey:BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8}).then((currentToken) =>{
       if(currentToken){
       //서버로 토큰 전송
       alert(currentToken)
