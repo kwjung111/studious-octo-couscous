@@ -48,7 +48,9 @@
   <button type="button" onclick="mic()">mic</button>
   <button type="button" onclick="contact()">연락처_IOS</button>
   <button type="button" onclick="permissions()">권한</button>
-  <button type="button" onclick="push()">푸시</button>
+  <button type="button" onclick="noti()">알림</button>
+  <button type="button" onclick="psh()">푸시</button>
+  <button type="button" onclick="subs()">푸시구독</button>
   <input type="file" accept="image/*" onchange="handleFileSelect(event)">
   <input type="file" accept="image/*" capture="camera" onchange="handleFileSelect(event)">
 
@@ -57,7 +59,38 @@
 
   <video autoplay>vids</video>
 
+
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-analytics.js";
+    import { getMessaging, getToken } from "firebase/messaging";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyArhZhxCJQfiSlAmmyjlIoyq_P49DjAec0",
+      authDomain: "pushtest-e752a.firebaseapp.com",
+      projectId: "pushtest-e752a",
+      storageBucket: "pushtest-e752a.appspot.com",
+      messagingSenderId: "589795514448",
+      appId: "1:589795514448:web:44cdd5cbed32ce5267d955",
+      measurementId: "G-ESRYTC2FZK"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const messaging = getMessaging(app);
+  </script>
   <script>
+
+
+  var subscriptions
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register(
         '/sw.js'
@@ -171,20 +204,9 @@ function contact(){
 
   };
 
-  async function push(){
+  async function noti(){
 
     const registration = await navigator.serviceWorker.getRegistration();
-
-    /*
-    // 구독 요청
-    navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-    serviceWorkerRegistration.pushManager.subscribe({ userVisibleOnly: true })
-    .then(function(subscription) {
-      // 서버로 구독 정보 전송
-      sendSubscriptionToServer(subscription);
-      });
-    });
-    */
 
     if(Notification.permission === 'granted') {
       showNotification(registration);
@@ -212,11 +234,80 @@ function contact(){
 
   }
 
+  function psh(){
+
+    getToken(messaging,{vapidKey:BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8}).then((currentToken) =>{
+      if(currentToken){
+      //서버로 토큰 전송
+      alert(currentToken)
+    }else {
+      alert('No tok')
+    }
+  });
+
+    let vapIdKeys = {
+      publicKey: 'BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8',
+      privateKey: '9L1y028vegGS0s0wJxeCSKh_6cknYGZ8Xom0GVlImvg'
+    }
+
+    webpush.setVapidDetails('kwkwjung@gmail.com', vapIdKeys.publicKey, vapIdKeys.privateKey)
+
+    /*
+    const pushConfig = {
+      endpoint : sub.endpoint,
+      keys : {
+        auth : sub.keys.auth,
+        p256dh : sub.keys.p256dh
+      }
+    }
+
+
+    webpush.sendNotification( pushSubscription,
+  JSON.stringify({
+    title: "푸시",
+    body: "바디",
+    link: "https://main--glittering-strudel-f2b05d.netlify.app/",
+  }),
+
+  */
+
+  /*
+  {
+    TTL: 3600 * 12,
+  }
+  */
+  }
+
+  function subs() {
+    //service worker를 지원하지 않으면 return
+    if(!('serviceWorker' in navigator)) return;
+
+    let reg;
+    navigator.serviceWorker.ready.then( swreg => {
+      reg = swreg;
+      //subscription이 이미 있는지 조회
+      return swreg.pushManager.getSubscription();
+    }).then( sub => {
+      //subscription이 없다면 생성
+      if(sub === null) {
+        const vapidPublicKey = 'BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8',
+              convertedVapidPublicKey = this.urlBase64ToUint8Array(vapidPublicKey);
+
+        return reg.pushManager.subscribe({
+          userVisibleOnly : true,
+          applicationServerKey : convertedVapidPublicKey
+        });
+      }
+    }).then( newSub =>{
+      subscriptions = newSub
+    })
+  }
 
 
 
 
   </script>
+
 </body>
 
 </html>
