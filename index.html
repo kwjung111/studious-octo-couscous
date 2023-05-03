@@ -86,6 +86,7 @@
     const analytics = getAnalytics(app);
     const messaging = getMessaging(app);
 
+    const msg = getMessaging();
 
     getToken(msg,{vapidKey:"BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8"}).then((currentToken) =>{
       if(currentToken){
