@@ -86,7 +86,6 @@
     const analytics = getAnalytics(app);
     const messaging = getMessaging(app);
 
-    const msg = getMessaging();
 
   </script>
   <script>
@@ -239,7 +238,7 @@ function contact(){
 
   function psh(){
 
-    messaging.getToken(msg,{vapidKey:BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8}).then((currentToken) =>{
+    getToken(messaging,{vapidKey:BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8}).then((currentToken) =>{
       if(currentToken){
       //서버로 토큰 전송
       alert(currentToken)
