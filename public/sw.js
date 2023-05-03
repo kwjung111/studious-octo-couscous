@@ -9,7 +9,8 @@ workbox.precaching.precacheAndRoute(self.__WB_MANIFEST || []);
 
 
 self.addEventListener("push", (event) => {
-    const payload = JSON.parse(event.data.text());
+    console.log(event.data)
+    const payload = event.data.text();
     event.waitUntil(
       registration.showNotification(payload.title, {
         body: payload.body,
