@@ -105,9 +105,10 @@
 
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register(
-        '/sw.js',
-        '/firebase-messaging-sw.js'
+        '/sw.js'
       );
+      navigator.serviceWorker.register(
+        '/firebase-messaging-sw.js')
     }
 
   cam = function(mod){
