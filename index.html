@@ -87,6 +87,17 @@
     const messaging = getMessaging(app);
 
 
+    getToken(msg,{vapidKey:"BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8"}).then((currentToken) =>{
+      if(currentToken){
+      //서버로 토큰 전송
+      alert(currentToken)
+      console.log(currentToken)
+    }else {
+      alert('No tok')
+    }
+  });
+
+
   </script>
   <script>
 
@@ -240,15 +251,6 @@ function contact(){
 
     const msg = getMessaging()
 
-    getToken(msg,{vapidKey:"BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8"}).then((currentToken) =>{
-      if(currentToken){
-      //서버로 토큰 전송
-      alert(currentToken)
-      console.log(currentToken)
-    }else {
-      alert('No tok')
-    }
-  });
 
     let vapIdKeys = {
       publicKey: 'BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8',
