@@ -83,10 +83,22 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
+    const messaging = app.messaging();
+
+
+    getToken(messaging,{vapidKey:"BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8"}).then((currentToken) =>{
+      if(currentToken){
+      //서버로 토큰 전송
+      alert(currentToken)
+      console.log(currentToken)
+    }else {
+      alert('No tok')
+    }
+  });
 
   </script>
   <script>
-    const messaging = app.messaging();
+
 
 
   var subscriptions
@@ -237,15 +249,7 @@ function contact(){
 
   function psh(){
 
-   getToken(messaging,{vapidKey:"BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8"}).then((currentToken) =>{
-    if(currentToken){
-    //서버로 토큰 전송
-    alert(currentToken)
-    console.log(currentToken)
-  }else {
-    alert('No tok')
-  }
-});
+
 
     let vapIdKeys = {
       publicKey: 'BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8',
