@@ -235,8 +235,7 @@ function contact(){
   }
 
   function psh(){
-
-    getToken(messaging,{vapidKey:BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8}).then((currentToken) =>{
+    messaging.getToken(messaging,{vapidKey:BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8}).then((currentToken) =>{
       if(currentToken){
       //서버로 토큰 전송
       alert(currentToken)
@@ -291,11 +290,11 @@ function contact(){
       //subscription이 없다면 생성
       if(sub === null) {
         const vapidPublicKey = 'BC6uPPhoNQ4Dnv073vYXxhUCh_7ObnVlqUEPuPTZrKGvXZj9RteWj7D0KAtiAecVy6MnJy83IrM5M5E9Ai2Isa8',
-              convertedVapidPublicKey = this.urlBase64ToUint8Array(vapidPublicKey);
+
 
         return reg.pushManager.subscribe({
           userVisibleOnly : true,
-          applicationServerKey : convertedVapidPublicKey
+          applicationServerKey : vapidPublicKey
         });
       }
     }).then( newSub =>{
