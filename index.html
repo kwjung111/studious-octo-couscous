@@ -175,6 +175,17 @@ function contact(){
 
     const registration = await navigator.serviceWorker.getRegistration();
 
+    /*
+    // 구독 요청
+    navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+    serviceWorkerRegistration.pushManager.subscribe({ userVisibleOnly: true })
+    .then(function(subscription) {
+      // 서버로 구독 정보 전송
+      sendSubscriptionToServer(subscription);
+      });
+    });
+    */
+
     if(Notification.permission === 'granted') {
       showNotification(registration);
     }
