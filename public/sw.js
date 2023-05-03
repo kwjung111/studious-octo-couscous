@@ -9,13 +9,17 @@ workbox.precaching.precacheAndRoute(self.__WB_MANIFEST || []);
 
 
 self.addEventListener("push", (event) => {
-    console.log(event.data)
     const payload = event.data.text();
     event.waitUntil(
-      registration.showNotification(payload.title, {
+      registration.showNotification(
+        payload.title
+        /*
+        payload.title, {
         body: payload.body,
         data: { link: payload.link },
-      })
+      }
+      */
+      )
     );
   });
   self.addEventListener("notificationclick", (event) => {
